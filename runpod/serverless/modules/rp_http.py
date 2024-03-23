@@ -56,6 +56,9 @@ async def _handle_result(session, job_data, job, url_template, log_message, is_s
     except (TypeError, RuntimeError) as err:
         log.error(f"Error while returning job result. | {err}", job['id'])
 
+    except Exception as err: # pylint: disable=broad-except
+        log.error(f"Error while returning job result. | {err}", job['id'])
+
     finally:
         #job_data status is used for local development with FastAPI
         if url_template == JOB_DONE_URL and job_data.get('status', None) != 'IN_PROGRESS':
