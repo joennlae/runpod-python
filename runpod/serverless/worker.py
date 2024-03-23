@@ -97,7 +97,7 @@ async def run_worker(config: Dict[str, Any]) -> None:
     client_session = aiohttp.ClientSession(
         connector=aiohttp.TCPConnector(limit=0),
         headers=_get_auth_header(),
-        timeout=aiohttp.ClientTimeout(total=300, connect=2, sock_connect=2)
+        timeout=aiohttp.ClientTimeout(total=600, ceil_threshold=400)
     )
 
     async with client_session as session:
